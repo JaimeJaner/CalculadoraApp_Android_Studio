@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0, btnSumar, btnMultiplicar, btnDividir, btnRestar, btnIgual;
     private TextView txtResultado;
-    private TextView txtEdit;
+    private TextView txtEdit, txtOperacion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         btnMultiplicar= findViewById(R.id.btnMultiplicar);
         txtResultado = findViewById(R.id.txtResultado);
         txtEdit = findViewById(R.id.txtEdit);
+        txtOperacion = findViewById(R.id.txtOperacion);
 
         btn0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,7 +188,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    txtEdit.setText(txtEdit.getText().toString() + "+");
+                    txtOperacion.setText(Integer.toString(Integer.parseInt(txtOperacion.getText().toString()) + Integer.parseInt(txtEdit.getText().toString())));
+                    txtEdit.setText("0");
                 }
             }
         });
@@ -197,11 +199,24 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(txtEdit.getText().toString().equals("0"))
                 {
-
+                    txtOperacion.setText(Integer.toString(Integer.parseInt(txtOperacion.getText().toString()) * Integer.parseInt(txtEdit.getText().toString())));
+                    txtEdit.setText("0");
                 }
                 else
                 {
-                    txtEdit.setText(txtEdit.getText().toString() + "*");
+                    if(txtOperacion.getText().equals("0"))
+                    {
+                        txtOperacion.setText(txtEdit.getText());
+                        txtEdit.setText("0");
+                    }
+                    else
+                    {
+
+                        txtOperacion.setText(Integer.toString(Integer.parseInt(txtOperacion.getText().toString()) * Integer.parseInt(txtEdit.getText().toString())));
+                        txtEdit.setText("0");
+                    }
+
+
                 }
             }
         });
@@ -215,7 +230,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    txtEdit.setText(txtEdit.getText().toString() + "-");
+                    txtOperacion.setText(Integer.toString(Integer.parseInt(txtEdit.getText().toString()) - Integer.parseInt(txtOperacion.getText().toString())));
+                    txtEdit.setText("0");
                 }
             }
         });
@@ -229,7 +245,18 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    txtEdit.setText(txtEdit.getText().toString() + "/");
+                    if(txtOperacion.getText().equals("0"))
+                    {
+                        txtOperacion.setText(txtEdit.getText());
+                        txtEdit.setText("0");
+                    }
+                    else
+                    {
+                        txtOperacion.setText(Integer.toString(Integer.parseInt(txtOperacion.getText().toString()) / Integer.parseInt(txtEdit.getText().toString())));
+                        txtEdit.setText("0");
+                    }
+
+
                 }
             }
         });
